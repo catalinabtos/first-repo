@@ -1,0 +1,82 @@
+{
+  "id": "dhss33mon5mmhovom5ifm6oucq",
+  "title": "Hospital Eduardo Pereira HEP",
+  "version": 2,
+  "vault": {
+    "id": "4lx4xrcitrogwy6ky5tzjwxgve",
+    "name": "Credenciales Feedback"
+  },
+  "category": "LOGIN",
+  "last_edited_by": "RMSHQMDSCVE7DBSSYYIAP6IIEU",
+  "created_at": "2025-02-05T22:18:42Z",
+  "updated_at": "2025-04-03T17:13:27Z",
+  "additional_information": "hep_cero",
+  "urls": [
+    {
+      "label": "website",
+      "primary": true,
+      "href": "https://feedback.cero.ai"
+    },
+    {
+      "label": "website",
+      "href": "https://localhost:5173"
+    }
+  ],
+  "sections": [
+    {
+      "id": "tkfbhw4crsujvi3ycnso2kpmlq",
+      "label": "Login de Usuario"
+    }
+  ],
+  "fields": [
+    {
+      "id": "username",
+      "type": "STRING",
+      "purpose": "USERNAME",
+      "label": "username",
+      "value": "hep_cero",
+      "reference": "op://Credenciales Feedback/Hospital Eduardo Pereira HEP/username"
+    },
+    {
+      "id": "password",
+      "type": "CONCEALED",
+      "purpose": "PASSWORD",
+      "label": "password",
+      "value": "G2xz1=H+uB",
+      "reference": "op://Credenciales Feedback/Hospital Eduardo Pereira HEP/password",
+      "password_details": {
+        "strength": "FAIR",
+        "history": ["pDFVm2few9X8prWB4v3f"]
+      }
+    },
+    {
+      "id": "notesPlain",
+      "type": "STRING",
+      "purpose": "NOTES",
+      "label": "notesPlain",
+      "reference": "op://Credenciales Feedback/Hospital Eduardo Pereira HEP/notesPlain"
+    },
+    {
+      "id": "tqqklqce4azcja46jinqlfxsva",
+      "section": {
+        "id": "tkfbhw4crsujvi3ycnso2kpmlq",
+        "label": "Login de Usuario"
+      },
+      "type": "STRING",
+      "label": "text",
+      "value": "hep",
+      "reference": "op://Credenciales Feedback/Hospital Eduardo Pereira HEP/Login de Usuario/text"
+    },
+    {
+      "id": "5im5efqjey5mi6kwlbcaofcn6e",
+      "section": {
+        "id": "tkfbhw4crsujvi3ycnso2kpmlq",
+        "label": "Login de Usuario"
+      },
+      "type": "CONCEALED",
+      "label": "password",
+      "value": "abtjNN264*",
+      "reference": "op://Credenciales Feedback/Hospital Eduardo Pereira HEP/Login de Usuario/password"
+    }
+  ]
+}
