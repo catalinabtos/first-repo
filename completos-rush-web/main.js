@@ -222,23 +222,46 @@ class Game {
   }
 
   attemptServe() {
-    if (!this.selectedCustomerId) {
-      this.log("Selecciona a un cliente para entregar.");
-      return;
-    }
-    const customer = this.customers.get(this.selectedCustomerId);
-    if (!customer || customer.state !== CUSTOMER_STATES.ORDERING) {
-      this.log("Ese cliente no está listo para recibir el pedido.");
-      return;
-    }
-
-    const personality = PERSONALITIES[customer.personality];
     const served = {
       ingredients: this.currentOrder.ingredients.slice(),
       beverage: this.currentOrder.beverage,
     };
 
-    const match = computeMatch(served, customer.order, personality);
+    let customer = null;
+    let match = null;
+
+    if (this.selectedCustomerId) {
+      const selected = this.customers.get(this.selectedCustomerId);
+      if (selected && selected.state === CUSTOMER_STATES.ORDERING) {
+        customer = selected;
+      } else {
+        if (selected) {
+          this.log("Ese cliente ya no puede recibir el pedido.");
+        }
+        this.selectedCustomerId = null;
+      }
+    }
+
+    if (!customer) {
+      const best = this.findBestCustomer(served);
+      if (best && best.match > 0) {
+        customer = best.customer;
+        match = best.match;
+        this.selectedCustomerId = customer.id;
+        this.log(`Apuntando automáticamente a ${customer.name}.`);
+      }
+    }
+
+    if (!customer) {
+      this.log("No hay clientes listos para recibir ese pedido.");
+      return;
+    }
+
+    const personality = PERSONALITIES[customer.personality];
+    if (match == null) {
+      match = computeMatch(served, customer.order, personality);
+    }
+
     if (match <= 0) {
       this.log(`¡${customer.name} recibió cualquier cosa!`, "fail");
       this.penalizeCustomer(customer, 2);
@@ -265,6 +288,24 @@ class Game {
     this.resetOrder();
     this.updateHUD();
     this.log(`Entregado a ${customer.name}: +$${payout.toFixed(1)} (match ${(match * 100).toFixed(0)}%)`, "success");
+  }
+
+  findBestCustomer(served) {
+    let bestCustomer = null;
+    let bestMatch = -Infinity;
+    for (const customer of this.customers.values()) {
+      if (customer.state !== CUSTOMER_STATES.ORDERING) continue;
+      const personality = PERSONALITIES[customer.personality];
+      const match = computeMatch(served, customer.order, personality);
+      if (match > bestMatch) {
+        bestMatch = match;
+        bestCustomer = customer;
+      }
+    }
+    if (!bestCustomer) {
+      return null;
+    }
+    return { customer: bestCustomer, match: bestMatch };
   }
 
   penalizeCustomer(customer, amount = 1) {
