@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Completos Rush Web</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="app">
+      <header class="hud">
+        <div class="hud__item">
+          <span class="label">Dinero</span>
+          <span id="money" class="value">0</span>
+        </div>
+        <div class="hud__item">
+          <span class="label">Meta</span>
+          <span id="goal" class="value">0</span>
+        </div>
+        <div class="hud__item">
+          <span class="label">Combo</span>
+          <span id="combo" class="value">0×</span>
+        </div>
+        <div class="hud__item">
+          <span class="label">Clientes Atendidos</span>
+          <span id="served" class="value">0</span>
+        </div>
+      </header>
+
+      <main>
+        <section class="scene">
+          <h2>Mesas</h2>
+          <div id="tables" class="tables"></div>
+          <h2>Fila</h2>
+          <div id="queue" class="queue"></div>
+        </section>
+
+        <section class="order-panel">
+          <div class="order-panel__current">
+            <h2>Preparando</h2>
+            <div id="current-order" class="current-order"></div>
+            <div class="order-actions">
+              <button id="undo" class="secondary">Deshacer</button>
+              <button id="discard" class="secondary">Descartar</button>
+              <button id="serve" class="primary">Entregar</button>
+            </div>
+          </div>
+          <div class="ingredients">
+            <h2>Ingredientes</h2>
+            <div id="ingredient-buttons" class="grid"></div>
+            <h2>Bebidas</h2>
+            <div id="beverage-buttons" class="grid"></div>
+          </div>
+        </section>
+      </main>
+
+      <section class="log" aria-live="polite">
+        <h2>Eventos</h2>
+        <ul id="log"></ul>
+      </section>
+    </div>
+
+    <template id="customer-template">
+      <div class="customer">
+        <div class="customer__info">
+          <div class="customer__name"></div>
+          <div class="customer__state"></div>
+        </div>
+        <div class="customer__order"></div>
+        <div class="customer__patience">
+          <div class="bar"><span class="bar__fill"></span></div>
+        </div>
+      </div>
+    </template>
+
+    <script type="module" src="main.js"></script>
+  </body>
+</html>
